@@ -11,7 +11,7 @@ import 'dotenv/config';
 
 // User define
 import route from './routes';
-import db from './app/models';
+import { db } from './app/models';
 
 const app: Application = express();
 const port: Number = Number(process.env.PORT) || 3000;

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import db from '../models';
+import { db } from '../models';
 import { User } from '../interfaces';
 
 class UserController {
