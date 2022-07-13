@@ -1,27 +1,22 @@
 'use strict';
 
 import 'dotenv/config';
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
+import fs = require('fs');
+import path = require('path');
+import { Sequelize, DataTypes } from 'sequelize';
 
 const basename = path.basename(__filename);
-console.log(path.join(__dirname));
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../../../config/config.json')[env];
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const config = require(`${__dirname}/../../../config/config.json`)[env];
 const db: any = {};
 
-let sequelize: any;
-if (config.use_env_variable) {
-    sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-    sequelize = new Sequelize(
-        config.database,
-        config.username,
-        config.password,
-        config
-    );
-}
+const sequelize = new Sequelize(
+    config.database,
+    config.username,
+    config.password,
+    config
+);
 
 fs.readdirSync(__dirname)
     .filter((file: string) => {
@@ -32,10 +27,8 @@ fs.readdirSync(__dirname)
         );
     })
     .forEach((file: any) => {
-        const model = require(path.join(__dirname, file))(
-            sequelize,
-            Sequelize.DataTypes
-        );
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        const model = require(path.join(__dirname, file))(sequelize, DataTypes);
         db[model.name] = model;
     });
 

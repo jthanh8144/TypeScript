@@ -11,7 +11,7 @@ class UserController {
     }
 
     async getUserByID(req: Request, res: Response, next: NextFunction) {
-        const id: Number = Number(req.params.id);
+        const id = Number(req.params.id);
         const user = await db.users.findOne({
             where: { id },
             include: ['blogs'],
@@ -20,7 +20,7 @@ class UserController {
     }
 
     async getBlogsOfUser(req: Request, res: Response, next: NextFunction) {
-        const id: Number = Number(req.params.id);
+        const id = Number(req.params.id);
         const user = await db.users.findOne({
             attributes: [],
             where: { id },
@@ -41,7 +41,7 @@ class UserController {
     }
 
     async update(req: Request, res: Response, next: NextFunction) {
-        const id: Number = Number(req.params.id);
+        const id = Number(req.params.id);
         const user: User = req.body;
         try {
             await db.users.update(user, {
@@ -55,7 +55,7 @@ class UserController {
     }
 
     async delete(req: Request, res: Response, next: NextFunction) {
-        const id: Number = Number(req.params.id);
+        const id = Number(req.params.id);
         try {
             await db.users.destroy({
                 where: { id },

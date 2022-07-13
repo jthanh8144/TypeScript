@@ -9,7 +9,7 @@ class BlogController {
     }
 
     async getByID(req: Request, res: Response, next: NextFunction) {
-        const id: Number = Number(req.params.id);
+        const id = Number(req.params.id);
         const blog: Blog = await db.blogs.findOne({
             where: { id },
         });
@@ -17,7 +17,7 @@ class BlogController {
     }
 
     async getUser(req: Request, res: Response, next: NextFunction) {
-        const id: Number = Number(req.params.id);
+        const id = Number(req.params.id);
         const blog: Blog = await db.blogs.findOne({
             where: { id },
         });
@@ -40,7 +40,7 @@ class BlogController {
     }
 
     async update(req: Request, res: Response, next: NextFunction) {
-        const id: Number = Number(req.params.id);
+        const id = Number(req.params.id);
         const blog: Blog = req.body;
         try {
             await db.blogs.update(blog, {
@@ -54,7 +54,7 @@ class BlogController {
     }
 
     async delete(req: Request, res: Response, next: NextFunction) {
-        const id: Number = Number(req.params.id);
+        const id = Number(req.params.id);
         try {
             await db.blogs.destroy({
                 where: { id },
